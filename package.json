@@ -1,0 +1,38 @@
+{
+  "name": "dfl",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Dfl api",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "knex": "<0.20.0",
+    "mysql": "^2.18.1",
+    "sqlite3": "latest",
+    "strapi": "3.2.1",
+    "strapi-admin": "3.2.1",
+    "strapi-connector-bookshelf": "3.2.1",
+    "strapi-plugin-content-manager": "3.2.1",
+    "strapi-plugin-content-type-builder": "3.2.1",
+    "strapi-plugin-email": "3.2.1",
+    "strapi-plugin-upload": "3.2.1",
+    "strapi-plugin-users-permissions": "3.2.1",
+    "strapi-utils": "3.2.1"
+  },
+  "author": {
+    "name": "quentin@qdan.io"
+  },
+  "strapi": {
+    "uuid": "8d0f75a5-501d-41c6-bca7-60c9d4553247"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
