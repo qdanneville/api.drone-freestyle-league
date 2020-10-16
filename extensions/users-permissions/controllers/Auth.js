@@ -447,6 +447,24 @@ module.exports = {
             );
         }
 
+        //Creating a pilote or brand profile when a user register
+        try {
+            //Adding 's' to role type to get pilots or brands object
+            //brands - pilots
+
+            const profileName = role.type + 's';
+
+            const profileData = {
+                name: ctx.request.body.name,
+                slug: ctx.request.body.slug,
+            }
+
+            await strapi.query(profileName).create(profileData)
+        }
+        catch (err) {
+            return ctx.badRequest(null, err);
+        }
+
         // Check if the provided email is valid or not.
         const isEmail = emailRegExp.test(params.email);
 
