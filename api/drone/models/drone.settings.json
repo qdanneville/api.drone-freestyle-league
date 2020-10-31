@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "drones",
+  "info": {
+    "name": "Drone",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "pilot": {
+      "model": "pilot"
+    },
+    "type": {
+      "model": "drone-type"
+    },
+    "medias": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "picture": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "drone_parts": {
+      "collection": "drone-parts"
+    },
+    "battery": {
+      "model": "battery"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/pilot-gears",
+      "handler": "pilot-gear.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pilot-gears/count",
+      "handler": "pilot-gear.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pilot-gears/:id",
+      "handler": "pilot-gear.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/pilot-gears",
+      "handler": "pilot-gear.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/pilot-gears/:id",
+      "handler": "pilot-gear.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/pilot-gears/:id",
+      "handler": "pilot-gear.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

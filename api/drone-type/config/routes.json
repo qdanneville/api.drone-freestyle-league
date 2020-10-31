@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/drone-types",
+      "handler": "drone-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/drone-types/count",
+      "handler": "drone-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/drone-types/:id",
+      "handler": "drone-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/drone-types",
+      "handler": "drone-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/drone-types/:id",
+      "handler": "drone-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/drone-types/:id",
+      "handler": "drone-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "squads",
+  "info": {
+    "name": "Squad",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "max_pilot": {
+      "type": "integer",
+      "default": 5
+    },
+    "leader": {
+      "unique": true,
+      "model": "pilot"
+    },
+    "tag": {
+      "type": "string",
+      "regex": "[a-zA-Z]{3}",
+      "private": false,
+      "maxLength": 3,
+      "minLength": 3
+    }
+  }
+}

@@ -496,25 +496,38 @@ module.exports = {
 
             const user = await strapi.query('user', 'users-permissions').create(params);
 
-            try {
-                const profileName = role.type + 's';
+            if (user) {
+                try {
 
-                const profileData = {
-                    name: ctx.request.body.name,
-                    slug: ctx.request.body.slug,
+                    const profileData = {
+                        display_name: params.name,
+                        user: user
+                    }
+
+                    const profile = await strapi.query('profile').create(profileData);
+
+                    //Then creating its matching profile type
+                    //Brand or pilot
+
+                    if (profile) {
+                        const profileTypeData = {
+                            profile: profile
+                        }
+    
+                        const profileType = await strapi.query(role.type).create(profileTypeData)
+                    }
+                } catch (err) {
+                    return ctx.badRequest(
+                        null,
+                        formatError({
+                            id: 'Auth.form.error.role.invalid',
+                            message: "Couldn't create a matching profile, try again",
+                        })
+                    );
                 }
-
-                await strapi.query(profileName).create(profileData)
-
-            } catch (err) {
-                return ctx.badRequest(
-                    null,
-                    formatError({
-                        id: 'Auth.form.error.role.invalid',
-                        message: 'Role is invalid.',
-                    })
-                );
             }
+
+
 
 
             const jwt = strapi.plugins['users-permissions'].services.jwt.issue(

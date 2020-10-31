@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pilots",
+  "info": {
+    "name": "Pilot",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "profile": {
+      "unique": true,
+      "model": "profile"
+    },
+    "squad": {
+      "model": "squad"
+    },
+    "level": {
+      "model": "level"
+    },
+    "current_points": {
+      "type": "float"
+    },
+    "pilot_gear": {
+      "model": "pilot-gear"
+    }
+  }
+}

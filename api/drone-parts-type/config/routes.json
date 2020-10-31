@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/drone-parts-types",
+      "handler": "drone-parts-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/drone-parts-types/count",
+      "handler": "drone-parts-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/drone-parts-types/:id",
+      "handler": "drone-parts-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/drone-parts-types",
+      "handler": "drone-parts-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/drone-parts-types/:id",
+      "handler": "drone-parts-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/drone-parts-types/:id",
+      "handler": "drone-parts-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gears",
+  "info": {
+    "name": "Gear",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Goggle",
+        "Radio",
+        "Charger",
+        "Soldering"
+      ]
+    }
+  }
+}

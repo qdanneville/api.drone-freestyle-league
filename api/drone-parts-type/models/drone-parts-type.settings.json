@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dronepartstypes",
+  "info": {
+    "name": "DronePartsType"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

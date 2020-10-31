@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profiles",
+  "info": {
+    "name": "Profile",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "display_name": {
+      "type": "string"
+    },
+    "user": {
+      "unique": true,
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "followers": {
+      "collection": "profile"
+    },
+    "followees": {
+      "collection": "profile"
+    }
+  }
+}

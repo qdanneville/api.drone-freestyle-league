@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "batteries",
+  "info": {
+    "name": "Battery",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Lipo",
+        "LIMH",
+        "LIFE"
+      ]
+    },
+    "nb_cells": {
+      "type": "integer"
+    },
+    "mAh": {
+      "type": "float"
+    },
+    "C": {
+      "type": "integer"
+    },
+    "manufacturer": {
+      "type": "string"
+    }
+  }
+}

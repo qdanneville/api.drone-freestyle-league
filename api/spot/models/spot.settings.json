@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spots",
+  "info": {
+    "name": "Spot",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "float"
+    },
+    "longitude": {
+      "type": "float"
+    },
+    "description": {
+      "type": "text"
+    },
+    "public": {
+      "type": "boolean"
+    },
+    "pilot": {
+      "model": "pilot"
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": [
+        "easy",
+        "advanced",
+        "expert"
+      ]
+    },
+    "accessibility": {
+      "type": "enumeration",
+      "enum": [
+        "forest",
+        "sand",
+        "buildings"
+      ]
+    },
+    "medias": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

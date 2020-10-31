@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "droneparts",
+  "info": {
+    "name": "DronePart",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "merchant_url": {
+      "type": "string"
+    },
+    "consumable": {
+      "type": "boolean"
+    },
+    "price": {
+      "type": "float"
+    },
+    "drone_parts_type": {
+      "model": "drone-parts-type"
+    },
+    "merchant_name": {
+      "type": "string"
+    }
+  }
+}
