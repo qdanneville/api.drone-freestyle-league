@@ -26,6 +26,9 @@
     },
     "pilot_gear": {
       "model": "pilot-gear"
+    },
+    "drones": {
+      "collection": "drone"
     }
   }
 }
