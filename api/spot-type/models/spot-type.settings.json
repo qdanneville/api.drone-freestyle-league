@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spottypes",
+  "info": {
+    "name": "SpotType"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

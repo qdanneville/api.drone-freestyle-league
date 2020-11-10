@@ -29,22 +29,6 @@
     "pilot": {
       "model": "pilot"
     },
-    "difficulty": {
-      "type": "enumeration",
-      "enum": [
-        "easy",
-        "advanced",
-        "expert"
-      ]
-    },
-    "accessibility": {
-      "type": "enumeration",
-      "enum": [
-        "forest",
-        "sand",
-        "buildings"
-      ]
-    },
     "medias": {
       "collection": "file",
       "via": "related",
@@ -55,6 +39,40 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "enableLikes": {
+      "type": "boolean"
+    },
+    "enableShares": {
+      "type": "boolean"
+    },
+    "enableComments": {
+      "type": "boolean"
+    },
+    "enableTags": {
+      "type": "boolean"
+    },
+    "spot_type": {
+      "model": "spot-type"
+    },
+    "privacy": {
+      "type": "string",
+      "default": "private"
+    },
+    "spot_accessibility": {
+      "model": "spot-accessibility"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "showCreatorName": {
+      "type": "boolean"
     }
   }
 }
