@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/spots/me",
+      "handler": "spot.getMySpots",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/spots/count",
       "handler": "spot.count",
       "config": {
@@ -26,7 +34,7 @@
     },
     {
       "method": "GET",
-      "path": "/spots/:id",
+      "path": "/spots/:slug",
       "handler": "spot.findOne",
       "config": {
         "policies": []

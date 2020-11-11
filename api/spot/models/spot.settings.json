@@ -73,6 +73,12 @@
     },
     "showCreatorName": {
       "type": "boolean"
+    },
+    "difficulty": {
+      "type": "integer"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }
