@@ -11,6 +11,10 @@ const formatError = error => [
 
 module.exports = {
     findOne: async (ctx) => {
+        //A pilot can't get other pilots spots
+        //Unless the spot is public
+        //Or if the spot is shared with him (among friends)
+
         if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
             try {
                 const { id } = await strapi.plugins[
@@ -30,14 +34,10 @@ module.exports = {
                     .query('pilot')
                     .findOne({ profile: profile.id });
 
-                console.log('SPOT', spot);
-                console.log('PROFILE', profile);
-                console.log('PILOT', pilot);
 
-                //A pilot can't get other pilots spots
-                //Unless the spot is public
-                //Or the spot is shared with him (among friends)
-                if (pilot.id === spot.pilot.id) return spot
+                let isMyFriendSpot = await strapi.services.spot.isMyFriendSpot(spot, profile);
+                if (isMyFriendSpot !== -1) return spot
+                else if (pilot.id === spot.pilot.id) return spot
                 else throw true
             }
             catch (err) {
@@ -128,20 +128,47 @@ module.exports = {
                     .query('pilot')
                     .findOne({ profile: profile.id });
 
-                const mySpots = await strapi
-                    .query('spot')
-                    .find({ pilot: pilot.id });
+                let mySpots = []
 
+                //TODO only pilots friends
+                if (ctx.query) {
+                    //FRIENDS SPOTS
+                    //////// FRIEND SPOT LOGIC TO STORE ELSEWHERE
+                    if (ctx.query.friends) {
+                        const friendsSpots = await strapi.services.spot.getFriendsSpots(profile, ctx.query);
+                        mySpots = friendsSpots;
+                    }
+                    else {
+                        //OWN SPOTS
+                        let newQuery = ctx.query;
+                        newQuery.pilot = pilot.id
 
-                //The pilot object inside our spot object isn't needed
-                const mySpotsWithoutPilotInformation = mySpots.map(spot => {
-                    const { pilot, ...rest } = spot;
+                        mySpots = await strapi
+                            .query('spot')
+                            .find(newQuery);
+                    }
+                } else {
+                    //OWN SPOTS
+                    mySpots = await strapi
+                        .query('spot')
+                        .find({ pilot: pilot.id });
+                }
+
+                //TODO OPTIMIZE RETURNED OBJECT
+                mySpots = mySpots.map(spot => {
+                    const { updated_by, created_by, pilot, ...rest } = spot;
+                    if (spot.profile) {
+                        const { user, updated_by, ...profile } = spot.profile;
+                        rest.profile = profile
+                    }
+
                     return rest
                 })
 
-                if (mySpots) return mySpotsWithoutPilotInformation
+                if (mySpots) return mySpots
             }
             catch (err) {
+                console.log(err);
                 return ctx.badRequest(
                     null,
                     formatError({
@@ -151,5 +178,5 @@ module.exports = {
                 );
             }
         }
-    }
+    },
 };
