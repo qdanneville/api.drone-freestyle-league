@@ -23,9 +23,6 @@ module.exports = {
 
                 const spot = await strapi.query('spot').findOne({ slug: ctx.params.slug })
 
-                //If the spot is public, everyone can see it
-                if (spot.public) return spot
-
                 const profile = await strapi
                     .query('profile')
                     .findOne({ user: id });
@@ -34,8 +31,16 @@ module.exports = {
                     .query('pilot')
                     .findOne({ profile: profile.id });
 
+                //We want to know if the user who request the spot is the creator to edit the spot
+                if (pilot.id === spot.pilot.id) spot.canEdit = true;
+
+                //If the spot is public, everyone can see it
+                if (spot.public) return spot
 
                 let isMyFriendSpot = await strapi.services.spot.isMyFriendSpot(spot, profile);
+
+                console.log(spot);
+
                 if (isMyFriendSpot !== -1) return spot
                 else if (pilot.id === spot.pilot.id) return spot
                 else throw true
@@ -85,9 +90,15 @@ module.exports = {
                     return spot;
                 }));
 
+                const friendsSpots = await strapi.services.spot.getFriendsSpots(profile, ctx.query)
+
                 //Once we get all spots, we're creating a new feature
                 //A feature is a mapbox feature object in order to be displayed on the map
                 const publicSpotsFeatures = publicSpots.map(spot => {
+                    return strapi.services.spot.createSpotFeature(spot)
+                })
+
+                const friendsSpotsFeatures = friendsSpots.map(spot => {
                     return strapi.services.spot.createSpotFeature(spot)
                 })
 
@@ -98,8 +109,7 @@ module.exports = {
                 })
 
                 //TODO optimize data sent with only needed object
-
-                if (publicSpotsFeatures && pilotSpotsFeatures) return { publicSpotsFeatures, pilotSpotsFeatures }
+                if (publicSpotsFeatures && pilotSpotsFeatures && friendsSpotsFeatures) return { publicSpotsFeatures, friendsSpotsFeatures, pilotSpotsFeatures }
             }
 
             catch (err) {

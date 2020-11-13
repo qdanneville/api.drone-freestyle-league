@@ -54,7 +54,7 @@ module.exports = {
     isMyFriendSpot: async (spot, profile) => {
 
         //Can't get a friends private spots
-        if (spot.privacy === 'private') return false
+        if (spot.privacy === 'private') return -1
 
         return profile.followees.findIndex(followee => followee.id === spot.pilot.profile)
     }
