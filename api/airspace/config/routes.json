@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/airspaces",
+      "handler": "airspace.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/airspaces/count",
+      "handler": "airspace.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/airspaces/:id",
+      "handler": "airspace.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/airspaces",
+      "handler": "airspace.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/airspaces/:id",
+      "handler": "airspace.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/airspaces/:id",
+      "handler": "airspace.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

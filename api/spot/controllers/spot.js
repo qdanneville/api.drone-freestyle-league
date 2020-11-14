@@ -32,14 +32,18 @@ module.exports = {
                     .findOne({ profile: profile.id });
 
                 //We want to know if the user who request the spot is the creator to edit the spot
-                if (pilot.id === spot.pilot.id) spot.canEdit = true;
+                if (pilot.id === spot.pilot.id) {
+                    spot.canEdit = true;
+                    spot.profile = profile
+                } else {
+                    spot.profile = await strapi.query('profile').findOne({ id: spot.pilot.profile })
+                }
 
                 //If the spot is public, everyone can see it
                 if (spot.public) return spot
 
                 let isMyFriendSpot = await strapi.services.spot.isMyFriendSpot(spot, profile);
 
-                console.log(spot);
 
                 if (isMyFriendSpot !== -1) return spot
                 else if (pilot.id === spot.pilot.id) return spot
