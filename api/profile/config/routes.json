@@ -34,7 +34,15 @@
     },
     {
       "method": "PUT",
-      "path": "/profiles/:id",
+      "path": "/account/:id",
+      "handler": "profile.updateUserAccount",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/profiles/account/:id",
       "handler": "profile.update",
       "config": {
         "policies": []

@@ -1,3 +1,7 @@
+const formatError = error => [
+    { messages: [{ id: error.id, message: error.message, field: error.field }] },
+];
+
 module.exports = {
     find: async (ctx) => {
         let profile = null;
@@ -34,5 +38,55 @@ module.exports = {
         }
 
         return profiles;
+    },
+    updateUserAccount: async (ctx) => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+
+            const { id } = await strapi.plugins[
+                'users-permissions'
+            ].services.jwt.getToken(ctx);
+
+            const user = await strapi.query('user', 'users-permissions').findOne({ id: ctx.params.id });
+
+            //If the token user isn't the update user
+            if (user.id !== id) {
+                return ctx.badRequest(
+                    null,
+                    formatError({
+                        id: 'Auth.form.prohibited',
+                        message: 'Access prohibited',
+                    })
+                );
+            }
+
+            const { currentPassword, profile, ...userParams } = ctx.request.body
+
+            //If a user wants to change his password, he must validate his current password
+            if (currentPassword) {
+                const validPassword = await strapi.plugins[
+                    'users-permissions'
+                ].services.user.validatePassword(currentPassword, user.password);
+
+                if (!validPassword) {
+                    return ctx.badRequest(
+                        null,
+                        formatError({
+                            id: 'Auth.form.error.invalid',
+                            message: 'Current password invalid',
+                        })
+                    );
+                }
+            }
+
+            if (userParams.password) userParams.password = await strapi.plugins['users-permissions'].services.user.hashPassword(userParams);
+
+            let profileUpdated = null
+            if (profile) profileUpdated = await strapi.query('profile').update({ id: profile.id }, profile);
+
+            let userUpdated = await strapi.query('user', 'users-permissions').update({ id: ctx.params.id }, userParams);
+
+            return { profileId: profileUpdated.id, userId: userUpdated.id }
+        }
     }
+
 };
