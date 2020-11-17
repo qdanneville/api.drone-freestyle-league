@@ -42,7 +42,7 @@
     },
     {
       "method": "PUT",
-      "path": "/profiles/account/:id",
+      "path": "/profiles/:id",
       "handler": "profile.update",
       "config": {
         "policies": []

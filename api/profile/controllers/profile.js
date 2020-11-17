@@ -50,13 +50,7 @@ module.exports = {
 
             //If the token user isn't the update user
             if (user.id !== id) {
-                return ctx.badRequest(
-                    null,
-                    formatError({
-                        id: 'Auth.form.prohibited',
-                        message: 'Access prohibited',
-                    })
-                );
+                return ctx.unauthorized(`You can't update this entry`);
             }
 
             const { currentPassword, profile, ...userParams } = ctx.request.body
@@ -86,6 +80,24 @@ module.exports = {
             let userUpdated = await strapi.query('user', 'users-permissions').update({ id: ctx.params.id }, userParams);
 
             return { profileId: profileUpdated.id, userId: userUpdated.id }
+        }
+    },
+    update: async ctx => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+            const { id } = await strapi.plugins[
+                'users-permissions'
+            ].services.jwt.getToken(ctx);
+
+            const profile = await strapi.query('profile').findOne({ id: ctx.params.id })
+
+            if (profile.user.id !== id) {
+                return ctx.unauthorized(`You can't update this entry`);
+            }
+
+
+            body = ctx.request.body;
+
+            return await strapi.services.profile.update({ id: ctx.params.id }, body);
         }
     }
 

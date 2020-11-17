@@ -33,6 +33,30 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "fullname": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "youtube_channel": {
+      "type": "string"
+    },
+    "instagram_account": {
+      "type": "string"
+    },
+    "airvuz_account": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "birth_date": {
+      "type": "date"
     }
   }
 }
