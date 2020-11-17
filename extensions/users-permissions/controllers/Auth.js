@@ -500,7 +500,8 @@ module.exports = {
                 try {
 
                     const profileData = {
-                        display_name: params.name,
+                        display_name: params.display_name,
+                        fullname: params.fullname,
                         user: user
                     }
 
@@ -513,7 +514,7 @@ module.exports = {
                         const profileTypeData = {
                             profile: profile
                         }
-    
+
                         const profileType = await strapi.query(role.type).create(profileTypeData)
                     }
                 } catch (err) {
