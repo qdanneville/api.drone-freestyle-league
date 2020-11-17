@@ -22,7 +22,8 @@
       "model": "level"
     },
     "current_points": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "pilot_gear": {
       "model": "pilot-gear"

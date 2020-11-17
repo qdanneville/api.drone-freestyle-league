@@ -56,7 +56,8 @@
       "type": "string"
     },
     "birth_date": {
-      "type": "date"
+      "type": "date",
+      "default": "2020-11-01T11:00:00.000Z"
     }
   }
 }
