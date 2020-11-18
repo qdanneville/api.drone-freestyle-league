@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/profile-likes-spots",
+      "handler": "profile-likes-spot.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/profile-likes-spots/count",
+      "handler": "profile-likes-spot.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/profile-likes-spots/:id",
+      "handler": "profile-likes-spot.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/profile-likes-spots",
+      "handler": "profile-likes-spot.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/profile-likes-spots/:id",
+      "handler": "profile-likes-spot.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/profile-likes-spots/:id",
+      "handler": "profile-likes-spot.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

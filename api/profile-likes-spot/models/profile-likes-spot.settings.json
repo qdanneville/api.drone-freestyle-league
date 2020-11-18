@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profilelikesspots",
+  "info": {
+    "name": "ProfileLikesSpot"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "date": {
+      "type": "datetime"
+    },
+    "profile": {
+      "model": "profile"
+    },
+    "spot": {
+      "model": "spot"
+    }
+  }
+}
