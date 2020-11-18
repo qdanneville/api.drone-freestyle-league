@@ -193,4 +193,25 @@ module.exports = {
             }
         }
     },
+    delete: async ctx => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+
+            const { id } = await strapi.plugins[
+                'users-permissions'
+            ].services.jwt.getToken(ctx);
+
+            const spot = await strapi.query('spot').findOne({ id: ctx.params.id });
+
+            const profile = await strapi
+                .query('profile')
+                .findOne({ user: id });
+
+            //If the user isn't the spot owner
+            if (spot.pilot.profile !== profile.id) {
+                return ctx.unauthorized(`You can't delete this entry`);
+            }
+
+            return await strapi.query('spot').delete({ id: ctx.params.id });
+        }
+    }
 };
