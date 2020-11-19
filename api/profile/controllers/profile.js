@@ -99,6 +99,18 @@ module.exports = {
 
             return await strapi.services.profile.update({ id: ctx.params.id }, body);
         }
-    }
+    },
+    findOneBySlug: async ctx => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
 
+            const { slug } = ctx.params;
+            const profile = await strapi.query('profile').findOne({ slug: slug })
+
+            if (profile && profile.private) {
+                return ctx.unauthorized(`This profile is private`);
+            }
+
+            return profile
+        }
+    }
 };

@@ -25,6 +25,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/profiles/slug/:slug",
+      "handler": "profile.findOneBySlug",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/profiles",
       "handler": "profile.create",
