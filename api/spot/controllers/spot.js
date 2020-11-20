@@ -182,7 +182,6 @@ module.exports = {
                 if (mySpots) return mySpots
             }
             catch (err) {
-                console.log(err);
                 return ctx.badRequest(
                     null,
                     formatError({
@@ -212,12 +211,11 @@ module.exports = {
 
             const friendsSpots = await strapi.services.spot.getFriendsSpots(profile, ctx.query);
 
-            //A user can only retrieve a pilot's public spots
-            //And eventually a pilot shared with friends spots
-            const filteredSpots = spots.filter(spot => {
-                if (spot.privacy !== 'private') return spot;
-                return friendsSpots.find(friendspot => friendspot.id === spot)
+            let filteredSpots = spots.filter(spot => {
+                if (spot.privacy === 'public') return spot;
             })
+
+            friendsSpots.forEach(spot => filteredSpots.push(spot))
 
             return filteredSpots
         }
