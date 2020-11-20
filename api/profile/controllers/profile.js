@@ -104,6 +104,10 @@ module.exports = {
 
             const { slug } = ctx.params;
             const profile = await strapi.query('profile').findOne({ slug: slug })
+            const profiles = await strapi.query('profile').find({})
+            console.log('PROFILE', profile)
+            console.log('PROFILES', profiles)
+
 
             if (!profile) {
                 return ctx.unauthorized(`Can't find this profile`);
