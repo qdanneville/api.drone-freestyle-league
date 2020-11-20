@@ -104,10 +104,6 @@ module.exports = {
 
             const { slug } = ctx.params;
             const profile = await strapi.query('profile').findOne({ slug: slug })
-            const profiles = await strapi.query('profile').find({})
-            console.log('PROFILE', profile)
-            console.log('PROFILES', profiles)
-
 
             if (!profile) {
                 return ctx.unauthorized(`Can't find this profile`);
@@ -176,6 +172,30 @@ module.exports = {
         }
 
         return profile.followees
-    }
+    },
+    getProfileFollowsProfile: async ctx => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+            const { id } = await strapi.plugins[
+                'users-permissions'
+            ].services.jwt.getToken(ctx);
 
+            const requestProfile = await strapi.query('profile').findOne({ user: id })
+
+            const { profile } = ctx.query
+            const followProfile = await strapi.query('profile').findOne({ id: profile })
+
+            if (!requestProfile) {
+                return ctx.unauthorized(`Unauthorized`);
+            }
+
+            if (!followProfile) {
+                return ctx.badRequest(`Can't find the profile`);
+            }
+
+            const isFollower = followProfile.followers.findIndex(follower => follower.id === requestProfile.id)
+
+            if (isFollower !== -1) return true
+            else return false
+        }
+    }
 };

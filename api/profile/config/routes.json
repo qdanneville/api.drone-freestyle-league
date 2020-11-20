@@ -49,6 +49,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/profiles/follows/profile",
+      "handler": "profile.getProfileFollowsProfile",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/profiles",
       "handler": "profile.create",
