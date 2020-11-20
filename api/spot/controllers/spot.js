@@ -193,6 +193,35 @@ module.exports = {
             }
         }
     },
+    getPilotSpots: async ctx => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+            const { id } = await strapi.plugins[
+                'users-permissions'
+            ].services.jwt.getToken(ctx);
+
+            const profile = await strapi.query('profile').findOne({ user: id });
+            const pilot = await strapi.query('pilot').findOne({ id: ctx.query.pilot });
+            const spots = await strapi.query('spot').find({ pilot: ctx.query.pilot });
+
+            if (!pilot) {
+                return ctx.unauthorized(`Can't find this profile`);
+            }
+
+            //When a pilot requests his own spots
+            if (pilot.profile.id === profile.id) return spots
+
+            const friendsSpots = await strapi.services.spot.getFriendsSpots(profile, ctx.query);
+
+            //A user can only retrieve a pilot's public spots
+            //And eventually a pilot shared with friends spots
+            const filteredSpots = spots.filter(spot => {
+                if (spot.privacy !== 'private') return spot;
+                return friendsSpots.find(friendspot => friendspot.id === spot)
+            })
+
+            return filteredSpots
+        }
+    },
     delete: async ctx => {
         if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
 

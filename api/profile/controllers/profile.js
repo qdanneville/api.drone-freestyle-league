@@ -94,7 +94,6 @@ module.exports = {
                 return ctx.unauthorized(`You can't update this entry`);
             }
 
-
             body = ctx.request.body;
 
             return await strapi.services.profile.update({ id: ctx.params.id }, body);
@@ -106,11 +105,73 @@ module.exports = {
             const { slug } = ctx.params;
             const profile = await strapi.query('profile').findOne({ slug: slug })
 
+            if (!profile) {
+                return ctx.unauthorized(`Can't find this profile`);
+            }
+
             if (profile && profile.private) {
                 return ctx.unauthorized(`This profile is private`);
             }
 
+            const profileType = await strapi.api.profile.services.profile.getProfileType(profile);
+
+            if (profileType) {
+                profile.type = profileType
+            }
+
             return profile
         }
+    },
+    toggleFollow: async ctx => {
+        if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+
+            const { id } = await strapi.plugins[
+                'users-permissions'
+            ].services.jwt.getToken(ctx);
+
+            const requestProfile = await strapi.query('profile').findOne({ user: id })
+
+            const { slug } = ctx.params
+            const followProfile = await strapi.query('profile').findOne({ slug: slug })
+
+            if (!requestProfile) {
+                return ctx.unauthorized(`Unauthorized`);
+            }
+
+            if (!followProfile) {
+                return ctx.badRequest(`Can't find the profile`);
+            }
+
+            return await strapi.services.profile.toggleFollow(requestProfile, followProfile);
+        }
+    },
+    getProfileFollowers: async ctx => {
+        const { slug } = ctx.params;
+        const profile = await strapi.query('profile').findOne({ slug: slug })
+
+        if (!profile) {
+            return ctx.unauthorized(`Can't find this profile`);
+        }
+
+        if (ctx.query.count) {
+            return profile.followers.length
+        }
+
+        return profile.followers
+    },
+    getProfileFollowees: async ctx => {
+        const { slug } = ctx.params;
+        const profile = await strapi.query('profile').findOne({ slug: slug })
+
+        if (!profile) {
+            return ctx.unauthorized(`Can't find this profile`);
+        }
+
+        if (ctx.query.count) {
+            return profile.followees.length
+        }
+
+        return profile.followees
     }
+
 };

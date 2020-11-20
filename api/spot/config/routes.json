@@ -26,6 +26,14 @@
     },
     {
       "method": "GET",
+      "path": "/spots/pilot",
+      "handler": "spot.getPilotSpots",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/spots/count",
       "handler": "spot.count",
       "config": {

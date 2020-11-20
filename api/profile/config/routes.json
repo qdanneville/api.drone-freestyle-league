@@ -33,6 +33,22 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/profiles/slug/:slug/followers/",
+      "handler": "profile.getProfileFollowers",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/profiles/slug/:slug/followees/",
+      "handler": "profile.getProfileFollowees",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/profiles",
       "handler": "profile.create",
@@ -44,6 +60,14 @@
       "method": "PUT",
       "path": "/account/:id",
       "handler": "profile.updateUserAccount",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/follow/:slug",
+      "handler": "profile.toggleFollow",
       "config": {
         "policies": []
       }
