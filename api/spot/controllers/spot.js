@@ -209,13 +209,17 @@ module.exports = {
             //When a pilot requests his own spots
             if (pilot.profile.id === profile.id) return spots
 
-            const friendsSpots = await strapi.services.spot.getFriendsSpots(profile, ctx.query);
+            const pilotProfile = await strapi.query('profile').findOne({ id: pilot.profile.id })
+
+            const isFollower = pilotProfile.followers.findIndex(follower => follower.id === profile.id)
 
             let filteredSpots = spots.filter(spot => {
-                if (spot.privacy === 'public') return spot;
+                if (isFollower !== -1) {
+                    if (spot.privacy !== 'private') return spot
+                } else {
+                    if (spot.privacy === 'public') return spot;
+                }
             })
-
-            friendsSpots.forEach(spot => filteredSpots.push(spot))
 
             return filteredSpots
         }
