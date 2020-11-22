@@ -1,3 +1,5 @@
+const slugify = require('slugify');
+
 const formatError = error => [
     { messages: [{ id: error.id, message: error.message, field: error.field }] },
 ];
@@ -75,9 +77,17 @@ module.exports = {
             if (userParams.password) userParams.password = await strapi.plugins['users-permissions'].services.user.hashPassword(userParams);
 
             let profileUpdated = null
+
+            const newSlug = slugify(userParams.username);
+
+            if (newSlug) {
+                profile.slug = newSlug;
+            }
+
             if (profile) profileUpdated = await strapi.query('profile').update({ id: profile.id }, profile);
 
             let userUpdated = await strapi.query('user', 'users-permissions').update({ id: ctx.params.id }, userParams);
+
 
             return { profileId: profileUpdated.id, userId: userUpdated.id }
         }
