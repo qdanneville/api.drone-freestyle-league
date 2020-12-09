@@ -65,6 +65,9 @@
     "private": {
       "type": "boolean",
       "default": false
+    },
+    "bio": {
+      "type": "text"
     }
   }
 }
