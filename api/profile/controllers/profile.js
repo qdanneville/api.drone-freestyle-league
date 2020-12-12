@@ -167,7 +167,11 @@ module.exports = {
             return profile.followers.length
         }
 
-        return profile.followers
+        const followers = profile.followers.map(follower => {
+            return { id: follower.id, display_name: follower.display_name, user: follower.user, slug: follower.slug, avatar: follower.avatar }
+        })
+
+        return followers
     },
     getProfileFollowees: async ctx => {
         const { slug } = ctx.params;
@@ -181,7 +185,11 @@ module.exports = {
             return profile.followees.length
         }
 
-        return profile.followees
+        const followees = profile.followees.map(followee => {
+            return { id: followee.id, display_name: followee.display_name, user: followee.user, slug: followee.slug, avatar: followee.avatar }
+        })
+
+        return followees
     },
     getProfileFollowsProfile: async ctx => {
         if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
