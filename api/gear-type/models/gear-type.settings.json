@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "geartypes",
+  "info": {
+    "name": "GearType"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

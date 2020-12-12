@@ -17,9 +17,6 @@
     "description": {
       "type": "text"
     },
-    "pilot": {
-      "model": "pilot"
-    },
     "type": {
       "model": "drone-type"
     },
@@ -48,6 +45,20 @@
     },
     "battery": {
       "model": "battery"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

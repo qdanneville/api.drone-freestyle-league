@@ -21,16 +21,26 @@
       "type": "integer"
     },
     "manufacturer": {
+      "model": "manufacturer"
+    },
+    "gear_type": {
+      "model": "gear-type"
+    },
+    "vendor_link": {
       "type": "string"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Goggle",
-        "Radio",
-        "Charger",
-        "Soldering"
-      ]
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "slug": {
+      "type": "string",
+      "unique": false
     }
   }
 }

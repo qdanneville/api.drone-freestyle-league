@@ -17,11 +17,11 @@
     "batteries": {
       "collection": "battery"
     },
-    "name": {
-      "type": "string"
+    "drones": {
+      "collection": "drone"
     },
-    "description": {
-      "type": "text"
+    "pilot": {
+      "model": "pilot"
     }
   }
 }

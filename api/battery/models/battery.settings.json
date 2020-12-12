@@ -36,6 +36,9 @@
     },
     "manufacturer": {
       "type": "string"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

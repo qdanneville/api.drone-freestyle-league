@@ -18,6 +18,30 @@
     },
     {
       "method": "GET",
+      "path": "/pilot-gears/accessories/",
+      "handler": "pilot-gear.findPilotGear",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pilot-gears/drones/",
+      "handler": "pilot-gear.findPilotGear",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/pilot-gears/batteries/",
+      "handler": "pilot-gear.findPilotGear",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/pilot-gears/:id",
       "handler": "pilot-gear.findOne",
       "config": {

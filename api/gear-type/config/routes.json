@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/gear-types",
+      "handler": "gear-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gear-types/count",
+      "handler": "gear-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gear-types/:id",
+      "handler": "gear-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/gear-types",
+      "handler": "gear-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/gear-types/:id",
+      "handler": "gear-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/gear-types/:id",
+      "handler": "gear-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
