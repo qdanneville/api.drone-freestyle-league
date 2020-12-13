@@ -18,7 +18,8 @@
       "type": "text"
     },
     "rating": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "manufacturer": {
       "model": "manufacturer"
@@ -41,6 +42,9 @@
     "slug": {
       "type": "string",
       "unique": false
+    },
+    "creator": {
+      "model": "profile"
     }
   }
 }

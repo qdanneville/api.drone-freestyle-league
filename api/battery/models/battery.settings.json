@@ -39,6 +39,9 @@
     },
     "slug": {
       "type": "string"
+    },
+    "creator": {
+      "model": "profile"
     }
   }
 }
