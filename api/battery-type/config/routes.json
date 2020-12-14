@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/battery-types",
+      "handler": "battery-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/battery-types/count",
+      "handler": "battery-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/battery-types/:id",
+      "handler": "battery-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/battery-types",
+      "handler": "battery-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/battery-types/:id",
+      "handler": "battery-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/battery-types/:id",
+      "handler": "battery-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
