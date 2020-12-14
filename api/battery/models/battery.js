@@ -7,13 +7,15 @@ const slugify = require('slugify');
  * to customize this model
  */
 
+// TODO PUT A UUID
 module.exports = {
     lifecycles: {
-        async beforeCreate(data) {
-            if (data.name) data.slug = slugify(data.name);
+        async afterCreate(data) {
+            if (data.name) data.slug = slugify(data.name + '-' + data.id);
+            await strapi.query('battery').update({ id: data.id }, { slug: data.slug })
         },
         async beforeUpdate(data, attrs) {
-            if (attrs.name) attrs.slug = slugify(attrs.name);
+            if (attrs && attrs.name && data && data.id) attrs.slug = slugify(attrs.name + '-' + data.id);
         },
     },
 };

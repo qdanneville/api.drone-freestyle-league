@@ -17,14 +17,6 @@
     "description": {
       "type": "text"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Lipo",
-        "LIMH",
-        "LIFE"
-      ]
-    },
     "nb_cells": {
       "type": "integer"
     },
@@ -34,14 +26,35 @@
     "C": {
       "type": "integer"
     },
-    "manufacturer": {
-      "type": "string"
-    },
     "slug": {
       "type": "string"
     },
     "creator": {
       "model": "profile"
+    },
+    "manufacturer": {
+      "model": "manufacturer"
+    },
+    "vendor_link": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "rating": {
+      "type": "integer",
+      "max": 100,
+      "min": 0,
+      "default": 0
+    },
+    "battery_type": {
+      "model": "battery-type"
     }
   }
 }

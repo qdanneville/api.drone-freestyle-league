@@ -3,7 +3,7 @@
     {
       "method": "GET",
       "path": "/pilot-gears",
-      "handler": "pilot-gear.find",
+      "handler": "pilot-gear.findPilotGear",
       "config": {
         "policies": []
       }
