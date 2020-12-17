@@ -64,7 +64,7 @@ module.exports = {
             return ctx.unauthorized(`You can't delete this entry`);
         }
 
-        entity = await strapi.services.battery.delete({ id });
+        entity = await strapi.query('drone-parts').delete({ id });
         return {}
     },
 };
