@@ -17,7 +17,7 @@
     "description": {
       "type": "text"
     },
-    "merchant_url": {
+    "vendor_link": {
       "type": "string"
     },
     "consumable": {
@@ -29,8 +29,23 @@
     "drone_parts_type": {
       "model": "drone-parts-type"
     },
-    "merchant_name": {
-      "type": "string"
+    "manufacturer": {
+      "model": "manufacturer"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "creator": {
+      "model": "profile"
     }
   }
 }

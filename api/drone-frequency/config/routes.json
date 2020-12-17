@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/drone-frequencies",
+      "handler": "drone-frequency.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/drone-frequencies/count",
+      "handler": "drone-frequency.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/drone-frequencies/:id",
+      "handler": "drone-frequency.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/drone-frequencies",
+      "handler": "drone-frequency.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/drone-frequencies/:id",
+      "handler": "drone-frequency.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/drone-frequencies/:id",
+      "handler": "drone-frequency.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

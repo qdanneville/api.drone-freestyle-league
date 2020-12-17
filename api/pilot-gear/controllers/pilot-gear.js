@@ -42,13 +42,13 @@ module.exports = {
                 entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['gears', 'gears.image', 'gears.gear_type', 'gears.manufacturer'])
                 entities = entities ? entities.gears : []
             } else if (url.includes('drones')) {
-                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['drones', 'drones.image'])
+                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['drones', 'drones.image', 'drones.type', 'drones.manufacturer', 'drones.batteries', 'drones.preffered_frequency', 'drones.regulation', 'drones.drone_parts'])
                 entities = entities ? entities.drones : []
             } else if (url.includes('batteries')) {
                 entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'batteries.image', 'batteries.battery_type', 'batteries.manufacturer'])
                 entities = entities ? entities.batteries : []
             } else {
-                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'drones', 'gears', 'gears.image', 'gears.gear_type', 'gears.manufacturer', 'drones.image', 'drones.drone_type', 'drones.manufacturer', 'batteries.image', 'batteries.battery_type', 'batteries.manufacturer'])
+                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'drones', 'gears', 'gears.image', 'gears.gear_type', 'gears.manufacturer', 'drones.image', 'drones.drone_type', 'drones.manufacturer','drones.type', 'batteries.image', 'batteries.battery_type', 'batteries.manufacturer'])
             }
 
             return entities

@@ -20,39 +20,17 @@
     "type": {
       "model": "drone-type"
     },
-    "medias": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false
-    },
-    "picture": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false
-    },
     "drone_parts": {
       "collection": "drone-parts"
     },
-    "battery": {
-      "model": "battery"
+    "batteries": {
+      "collection": "battery"
     },
     "image": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false
@@ -62,6 +40,24 @@
     },
     "creator": {
       "model": "profile"
+    },
+    "manufacturer": {
+      "model": "manufacturer"
+    },
+    "weight": {
+      "type": "integer"
+    },
+    "preffered_frequency": {
+      "model": "drone-frequency"
+    },
+    "vendor_link": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "regulation": {
+      "model": "regulation"
     }
   }
 }
