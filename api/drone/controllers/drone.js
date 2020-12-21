@@ -65,4 +65,14 @@ module.exports = {
         entity = await strapi.services.drone.delete({ id });
         return {}
     },
+    async findOneBySlug(ctx) {
+        const { slug } = ctx.params;
+
+        let entity;
+
+        entity = await strapi.services.drone.findOne({ slug: slug }, ['image','batteries', 'batteries.manufacturer','batteries.battery_type','batteries.image', 'manufacturer','preffered_frequency','regulation','creator','creator.avatar', 'drone_parts', 'drone_parts.manufacturer','drone_parts.drone_parts_type','drone_parts.image'])
+
+        return sanitizeEntity(entity, { model: strapi.models.drone });
+
+    }
 };

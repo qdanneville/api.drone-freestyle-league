@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/drones/:slug",
+      "handler": "drone.findOneBySlug",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/drones/:id",
       "handler": "drone.findOne",
       "config": {
