@@ -26,9 +26,6 @@
     "price": {
       "type": "float"
     },
-    "drone_parts_type": {
-      "model": "drone-parts-type"
-    },
     "manufacturer": {
       "model": "manufacturer"
     },
@@ -46,6 +43,9 @@
     },
     "creator": {
       "model": "profile"
+    },
+    "type": {
+      "model": "drone-parts-type"
     }
   }
 }

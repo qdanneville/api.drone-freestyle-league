@@ -53,7 +53,7 @@
       "min": 0,
       "default": 0
     },
-    "battery_type": {
+    "type": {
       "model": "battery-type"
     }
   }

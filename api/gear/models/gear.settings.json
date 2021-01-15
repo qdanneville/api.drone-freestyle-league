@@ -24,9 +24,6 @@
     "manufacturer": {
       "model": "manufacturer"
     },
-    "gear_type": {
-      "model": "gear-type"
-    },
     "vendor_link": {
       "type": "string"
     },
@@ -45,6 +42,9 @@
     },
     "creator": {
       "model": "profile"
+    },
+    "type": {
+      "model": "gear-type"
     }
   }
 }

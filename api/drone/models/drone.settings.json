@@ -18,6 +18,7 @@
       "type": "text"
     },
     "type": {
+      "columnName": "type",
       "model": "drone-type"
     },
     "drone_parts": {

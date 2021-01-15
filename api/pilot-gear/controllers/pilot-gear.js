@@ -39,16 +39,16 @@ module.exports = {
             let entities = []
 
             if (url.includes('accessories')) {
-                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['gears', 'gears.image', 'gears.gear_type', 'gears.manufacturer'])
+                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['gears', 'gears.image', 'gears.type', 'gears.manufacturer'])
                 entities = entities ? entities.gears : []
             } else if (url.includes('drones')) {
                 entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['drones', 'drones.image', 'drones.type', 'drones.manufacturer', 'drones.batteries', 'drones.preffered_frequency', 'drones.regulation', 'drones.drone_parts'])
                 entities = entities ? entities.drones : []
             } else if (url.includes('batteries')) {
-                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'batteries.image', 'batteries.battery_type', 'batteries.manufacturer'])
+                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'batteries.image', 'batteries.type', 'batteries.manufacturer'])
                 entities = entities ? entities.batteries : []
             } else {
-                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'drones', 'gears', 'gears.image', 'gears.gear_type', 'gears.manufacturer', 'drones.image', 'drones.drone_type', 'drones.manufacturer', 'drones.type', 'batteries.image', 'batteries.battery_type', 'batteries.manufacturer'])
+                entities = await strapi.query('pilot-gear').findOne({ pilot: pilotId }, ['batteries', 'drones', 'gears', 'gears.image', 'gears.type', 'gears.manufacturer', 'drones.image', 'drones.drone_type', 'drones.manufacturer', 'drones.type', 'batteries.image', 'batteries.type', 'batteries.manufacturer','drones.drone_parts','drones.drone_parts.image','drones.drone_parts.type','drones.drone_parts.manufacturer'])
             }
 
             //If no entities are found, it means the user doesn't have a pilot gear yet

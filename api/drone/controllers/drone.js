@@ -18,7 +18,6 @@ module.exports = {
         const currentPilotDrones = await strapi.query('pilot-gear').findOne({ pilot: pilot.id }, ['drones'])
         let newPilotDrones = currentPilotDrones.drones
 
-
         //Adding the created gear to the current user profile pilot
         if (entity) {
             newPilotDrones.push(entity);
@@ -70,7 +69,7 @@ module.exports = {
 
         let entity;
 
-        entity = await strapi.services.drone.findOne({ slug: slug }, ['image','batteries', 'batteries.manufacturer','batteries.battery_type','batteries.image', 'manufacturer','preffered_frequency','regulation','creator','creator.avatar', 'drone_parts', 'drone_parts.manufacturer','drone_parts.drone_parts_type','drone_parts.image'])
+        entity = await strapi.services.drone.findOne({ slug: slug }, ['image','batteries', 'batteries.manufacturer','batteries.type','batteries.image', 'manufacturer','preffered_frequency','regulation','creator','creator.avatar', 'drone_parts', 'drone_parts.manufacturer','drone_parts.type','drone_parts.image'])
 
         return sanitizeEntity(entity, { model: strapi.models.drone });
 
