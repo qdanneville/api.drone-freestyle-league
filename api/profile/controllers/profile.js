@@ -167,9 +167,13 @@ module.exports = {
             return profile.followers.length
         }
 
-        const followers = profile.followers.map(follower => {
+        let followers = profile.followers.map(follower => {
             return { id: follower.id, display_name: follower.display_name, user: follower.user, slug: follower.slug, avatar: follower.avatar }
         })
+
+        if (ctx.request.url.includes('limit')) {
+            followers = followers.slice(0,10);
+        }
 
         return followers
     },

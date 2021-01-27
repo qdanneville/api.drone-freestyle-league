@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publications",
+  "info": {
+    "name": "publication",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "media": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "publication_category": {
+      "model": "publication-category"
+    },
+    "privacy": {
+      "model": "privacy"
+    },
+    "publication_items": {
+      "collection": "publication-item"
+    },
+    "publisher": {
+      "model": "profile"
+    }
+  }
+}
