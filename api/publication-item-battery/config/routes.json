@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/publication-item-batteries",
+      "handler": "publication-item-battery.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/publication-item-batteries/count",
+      "handler": "publication-item-battery.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/publication-item-batteries/:id",
+      "handler": "publication-item-battery.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/publication-item-batteries",
+      "handler": "publication-item-battery.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/publication-item-batteries/:id",
+      "handler": "publication-item-battery.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/publication-item-batteries/:id",
+      "handler": "publication-item-battery.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

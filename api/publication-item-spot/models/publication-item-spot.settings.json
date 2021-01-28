@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_item_spots",
+  "info": {
+    "name": "publication_item_spot"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publication_item": {
+      "model": "publication-item"
+    },
+    "spot": {
+      "model": "spot"
+    }
+  }
+}

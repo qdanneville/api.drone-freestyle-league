@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "privacies",
+  "info": {
+    "name": "privacy"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

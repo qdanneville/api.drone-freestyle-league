@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_comment_likes",
+  "info": {
+    "name": "publication_comment_like",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publication_comment": {
+      "model": "publication-comment"
+    },
+    "profile": {
+      "model": "profile"
+    },
+    "date": {
+      "type": "datetime"
+    }
+  }
+}

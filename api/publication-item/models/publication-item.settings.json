@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_items",
+  "info": {
+    "name": "publication_item",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publication": {
+      "model": "publication"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "drone",
+        "drone_part",
+        "battery",
+        "spot",
+        "profile",
+        "gear"
+      ]
+    }
+  }
+}

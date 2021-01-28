@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_reactions",
+  "info": {
+    "name": "publication_reaction",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publication": {
+      "model": "publication"
+    },
+    "reaction": {
+      "model": "reaction"
+    },
+    "profile": {
+      "model": "profile"
+    }
+  }
+}

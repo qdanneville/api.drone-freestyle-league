@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_categories",
+  "info": {
+    "name": "publication_category"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

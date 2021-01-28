@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/publication-item-drone-parts",
+      "handler": "publication-item-drone-part.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/publication-item-drone-parts/count",
+      "handler": "publication-item-drone-part.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/publication-item-drone-parts/:id",
+      "handler": "publication-item-drone-part.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/publication-item-drone-parts",
+      "handler": "publication-item-drone-part.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/publication-item-drone-parts/:id",
+      "handler": "publication-item-drone-part.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/publication-item-drone-parts/:id",
+      "handler": "publication-item-drone-part.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

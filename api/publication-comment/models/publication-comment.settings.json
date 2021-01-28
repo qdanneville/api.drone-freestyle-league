@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_comments",
+  "info": {
+    "name": "publication_comment",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publication": {
+      "model": "publication"
+    },
+    "publisher": {
+      "model": "profile"
+    },
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

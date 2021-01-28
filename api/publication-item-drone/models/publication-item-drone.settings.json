@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publication_item_drones",
+  "info": {
+    "name": "publication_item_drone"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publication_item": {
+      "model": "publication-item"
+    },
+    "drone": {
+      "model": "drone"
+    }
+  }
+}
