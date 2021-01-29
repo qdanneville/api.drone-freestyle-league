@@ -28,15 +28,20 @@ module.exports = {
                     //Now we need to transform the category into a publication_item_category
                     if (itemCategory) itemCategory = 'publication-item-' + itemCategory
 
-                    let newItem = await strapi.query(itemCategory).findOne({ publication_item: item.id })
+                    let manufacturerPopulate = item.category + '.manufacturer'
+                    let typePopulate = item.category + '.type'
+                    let imagePopulate = item.category + '.image'
+
+                    if (item.category === 'spot') typePopulate = item.category + '.spot_type';
+                    if (item.category === 'profile') imagePopulate = item.category + '.avatar';
+
+                    let newItem = await strapi.query(itemCategory).findOne({ publication_item: item.id }, [manufacturerPopulate, typePopulate, imagePopulate])
                     const keys = Object.keys(newItem);
-                    console.log(keys)
                     newItem.item = newItem[keys[2]];
                     delete newItem[keys[2]]
-
-                    console.log(newItem);
-
                     // newItem.replace(item.category, 'item')
+                    newItem.itemType = item.category
+
                     if (newItem) return newItem
                 }))
             }
