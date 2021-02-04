@@ -10,7 +10,6 @@ const { getLinkPreview } = require('link-preview-js');
 
 module.exports = {
     async find(ctx) {
-        console.log('lol');
         let entities;
         if (ctx.query._q) {
             entities = await strapi.services.publication.search(ctx.query);
@@ -45,52 +44,62 @@ module.exports = {
 
         entity = await strapi.query('publication').create(publication);
 
-        console.log('publication', entity);
+        const publicationItems = await strapi.services.publication.createPublicationItems(items, entity.id);
 
-        //For each items, we have to create a publication item and add it the the created publication
-        const publicationItems = await Promise.all(items.map(async item => {
-
-            console.log('item id', item.id);
-            console.log('item type', item.type);
-
-            let publicationItemEntity;
-
-            publicationItemEntity = await strapi.query('publication-item').create({ category: item.type, publication: entity.id })
-
-            let publicationSpecificItemEntity;
-
-            console.log('publicationItemEntity', publicationItemEntity);
-
-            switch (item.type) {
-                case 'drone':
-                    publicationSpecificItemEntity = await strapi.query('publication-item-drone').create({ publication_item: publicationItemEntity.id, drone: item.id })
-                case 'gear':
-                    publicationSpecificItemEntity = await strapi.query('publication-item-gear').create({ publication_item: publicationItemEntity.id, gear: item.id })
-                case 'battery':
-                    publicationSpecificItemEntity = await strapi.query('publication-item-battery').create({ publication_item: publicationItemEntity.id, battery: item.id })
-                case 'drone_part':
-                    publicationSpecificItemEntity = await strapi.query('publication-item-drone-part').create({ publication_item: publicationItemEntity.id, drone_part: item.id })
-                case 'profile':
-                    publicationSpecificItemEntity = await strapi.query('publication-item-profile').create({ publication_item: publicationItemEntity.id, profile: item.id })
-                case 'spot':
-                    publicationSpecificItemEntity = await strapi.query('publication-item-spot').create({ publication_item: publicationItemEntity.id, spot: item.id })
-            }
-
-            if (item.type === 'drone') publicationSpecificItemEntity = await strapi.query('publication-item-drone').create({ publication_item: publicationItemEntity.id, drone: item.id })
-            else if (item.type === 'gear') publicationSpecificItemEntity = await strapi.query('publication-item-gear').create({ publication_item: publicationItemEntity.id, gear: item.id })
-            else if (item.type === 'battery') publicationSpecificItemEntity = await strapi.query('publication-item-battery').create({ publication_item: publicationItemEntity.id, battery: item.id })
-            else if (item.type === 'drone_part') publicationSpecificItemEntity = await strapi.query('publication-item-drone-part').create({ publication_item: publicationItemEntity.id, drone_part: item.id })
-            else if (item.type === 'profile') publicationSpecificItemEntity = await strapi.query('publication-item-profile').create({ publication_item: publicationItemEntity.id, profile: item.id })
-            else if (item.type === 'spot') publicationSpecificItemEntity = await strapi.query('publication-item-spot').create({ publication_item: publicationItemEntity.id, spot: item.id })
-
-
-
-            return { id: publicationItemEntity.id }
-        }))
+        console.log(publicationItems);
 
         //And finally add all those fine items to the correct publication
         entity = await strapi.query('publication').update({ id: entity.id }, { publication_items: publicationItems });
 
         return sanitizeEntity(entity, { model: strapi.models.publication });
+    },
+    async update(ctx) {
+        const { id } = ctx.params;
+
+        let entity;
+
+        const profile = await strapi.services.profile.findOne({ user: ctx.state.user.id }, [])
+
+        const publication = await strapi.services.publication.findOne({
+            id: ctx.params.id,
+            'publisher.id': profile.id,
+        });
+
+        if (!publication) {
+            return ctx.unauthorized(`You can't update this entry`);
+        }
+
+        let { items, ...body } = ctx.request.body
+
+        //Ugly as fuck - No time to do it better
+        await strapi.services.publication.resetPublicationItems(id);
+        const publicationItems = await strapi.services.publication.createPublicationItems(items, id);
+
+        body.publication_items = publicationItems
+
+        console.log('publication body', body)
+
+        entity = await strapi.query('publication').update({ id: id }, body);
+
+        return sanitizeEntity(entity, { model: strapi.models.publication });
+    },
+    async delete(ctx) {
+        const { id } = ctx.params;
+
+        let entity;
+
+        const profile = await strapi.services.profile.findOne({ user: ctx.state.user.id }, [])
+
+        const publication = await strapi.services.publication.findOne({
+            id: ctx.params.id,
+            'publisher.id': profile.id,
+        });
+
+        if (!publication) {
+            return ctx.unauthorized(`You can't delete this entry`);
+        }
+
+        entity = await strapi.services.publication.delete({ id });
+        return {}
     },
 };

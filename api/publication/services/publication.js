@@ -52,4 +52,44 @@ module.exports = {
 
         return newPublications
     },
+    async createPublicationItems(items, publicationId) {
+        //For each items, we have to create a publication item and add it the the created publication
+        const publicationItems = await Promise.all(items.map(async item => {
+
+            let publicationItemEntity;
+
+            publicationItemEntity = await strapi.query('publication-item').create({ category: item.type, publication: publicationId })
+
+            let publicationSpecificItemEntity;
+
+            switch (item.type) {
+                case 'drone':
+                    publicationSpecificItemEntity = await strapi.query('publication-item-drone').create({ publication_item: publicationItemEntity.id, drone: item.id })
+                case 'gear':
+                    publicationSpecificItemEntity = await strapi.query('publication-item-gear').create({ publication_item: publicationItemEntity.id, gear: item.id })
+                case 'battery':
+                    publicationSpecificItemEntity = await strapi.query('publication-item-battery').create({ publication_item: publicationItemEntity.id, battery: item.id })
+                case 'drone_part':
+                    publicationSpecificItemEntity = await strapi.query('publication-item-drone-part').create({ publication_item: publicationItemEntity.id, drone_part: item.id })
+                case 'profile':
+                    publicationSpecificItemEntity = await strapi.query('publication-item-profile').create({ publication_item: publicationItemEntity.id, profile: item.id })
+                case 'spot':
+                    publicationSpecificItemEntity = await strapi.query('publication-item-spot').create({ publication_item: publicationItemEntity.id, spot: item.id })
+            }
+
+            if (item.type === 'drone') publicationSpecificItemEntity = await strapi.query('publication-item-drone').create({ publication_item: publicationItemEntity.id, drone: item.id })
+            else if (item.type === 'gear') publicationSpecificItemEntity = await strapi.query('publication-item-gear').create({ publication_item: publicationItemEntity.id, gear: item.id })
+            else if (item.type === 'battery') publicationSpecificItemEntity = await strapi.query('publication-item-battery').create({ publication_item: publicationItemEntity.id, battery: item.id })
+            else if (item.type === 'drone_part') publicationSpecificItemEntity = await strapi.query('publication-item-drone-part').create({ publication_item: publicationItemEntity.id, drone_part: item.id })
+            else if (item.type === 'profile') publicationSpecificItemEntity = await strapi.query('publication-item-profile').create({ publication_item: publicationItemEntity.id, profile: item.id })
+            else if (item.type === 'spot') publicationSpecificItemEntity = await strapi.query('publication-item-spot').create({ publication_item: publicationItemEntity.id, spot: item.id })
+
+            return { id: publicationItemEntity.id }
+        }))
+
+        return publicationItems;
+    },
+    async resetPublicationItems(publicationId) {
+        return await strapi.query('publication-item').delete({ publication: publicationId })
+    }
 };
